@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Files.Models;
+using BinaryFile.Dto;
 
 namespace Files.Controllers
 {
@@ -18,6 +19,7 @@ namespace Files.Controllers
         }
 
         [HttpPost]
+        [Route("AttachmentFile")]
         public IActionResult UploadFile(IFormFile files)
         {
             if (files != null)
@@ -34,6 +36,7 @@ namespace Files.Controllers
                         FileType = fileExtention,
                         CreatedOn = DateTime.UtcNow
                     };
+
                     using (var target = new MemoryStream())
                     {
                         files.CopyTo(target);
